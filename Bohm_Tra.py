@@ -25,17 +25,18 @@ def Bohm_Trajec( Q, t, h, m, sigma ):
 time = np.linspace(0,0.25,300) # time grid
 h = 1 # Planck constant
 m = 1 # mass
-sigma = 0.05 
+sigma = 0.05
+slit_width = 0.11
 
 
 ## Solve the ODE using odeint from scipy. Intial Data revolves +0.11; -0.11 around the centers
 ## +1; -1 of the Gaussian functions
 
-for Q0 in np.linspace( -0.89, -1.11, 40 ):
+for Q0 in np.linspace( -1-slit_width, -1+slit_width, 40 ):
     sol = odeint( Bohm_Trajec, Q0, time, args=(h, m, sigma) )
     plt.plot(time, sol)
 
-for Q0 in np.linspace( 0.89, 1.11, 40 ):
+for Q0 in np.linspace( 1-slit_width, 1+slit_width, 40 ):
     sol = odeint( Bohm_Trajec, Q0, time, args=(h, m, sigma) )
     plt.plot(time, sol)
 
